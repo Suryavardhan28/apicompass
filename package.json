@@ -7,12 +7,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/surya-v/apicompass"
+    "url": "https://github.com/Suryavardhan28/apicompass"
   },
   "bugs": {
-    "url": "https://github.com/surya-v/apicompass/issues"
+    "url": "https://github.com/Suryavardhan28/apicompass/issues"
   },
-  "homepage": "https://github.com/surya-v/apicompass#readme",
+  "homepage": "https://github.com/Suryavardhan28/apicompass#readme",
   "icon": "resources/icons/apicompass-icon.png",
   "galleryBanner": {
     "color": "#1e293b",
