@@ -275,7 +275,7 @@ Current coverage:
 | Functions   | 100%   |
 | Lines       | 97%+   |
 | Test suites | 9      |
-| Tests       | 129    |
+| Tests       | 127    |
 
 Test fixtures for Express, NestJS, Flask, Django, FastAPI, and Go are in `test/fixtures/`.
 
@@ -290,8 +290,8 @@ This extension was built as the **Semester 4 Project** for the **BITS Pilani WIL
 | Object Oriented Design | Strategy, Factory, Observer, Singleton patterns; SOLID principles    |
 | Software Architecture  | Event-driven, layered architecture with clear separation of concerns |
 | Full Stack Development | TypeScript frontend (VS Code UI) + backend (parsing engine)          |
-| Quality Assurance      | 129 unit tests, 97%+ coverage, edge-case testing                     |
-| DevOps                 | Webpack build pipeline, `.vsix` packaging, CI-ready test scripts     |
+| Quality Assurance      | 127 unit tests, 97%+ coverage, edge-case testing                     |
+| DevOps                 | Webpack build pipeline, `.vsix` packaging, GitHub Actions CI         |
 | Scalable Services      | Async scanning, incremental parsing, debounced file watching         |
 | Database Design        | In-memory route cache with file-keyed storage                        |
 | API Based Products     | Built on top of the VS Code Extension API                            |
@@ -310,17 +310,50 @@ This extension was built as the **Semester 4 Project** for the **BITS Pilani WIL
 - [x] Route deduplication — done
 - [x] Keyboard shortcuts and context menus — done
 - [x] Export routes to JSON / OpenAPI stub — done
+- [x] CI/CD pipeline (GitHub Actions) — done
+- [x] Production packaging (.vscodeignore, CHANGELOG, LICENSE) — done
 - [ ] Publish to VS Code Marketplace
+
+---
+
+## Contributing
+
+```bash
+# Install dependencies
+npm install
+
+# Lint source and test files
+npm run lint
+
+# Check formatting
+npm run format:check
+
+# Auto-fix formatting
+npm run format
+
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Build for production
+npm run compile
+
+# Package as .vsix
+npm run package
+```
 
 ---
 
 ## License
 
-This project is part of an academic submission. Licensing details will be added upon public release.
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
 ## Author
 
 **Surya V**  
+**suryavardhan28@gmail.com**
 BITS Pilani WILP — Full Stack Engineering (2024TM93020)
