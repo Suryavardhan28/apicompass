@@ -2,7 +2,7 @@
 
 **Automated API Route Visualizer for VS Code**
 
-APICompass is a Visual Studio Code extension that scans your backend codebase and gives you an organized, clickable tree of every REST API endpoint — right inside the editor sidebar. It supports **Express.js**, **NestJS**, **Flask**, **Django**, **FastAPI**, and **Go** (Gin, Echo, Chi, Fiber, net/http) out of the box, and updates automatically as you edit your code.
+APICompass is a Visual Studio Code extension that scans your backend codebase and gives you an organized, clickable tree of every REST API endpoint - right inside the editor sidebar. It supports **Express.js**, **NestJS**, **Flask**, **Django**, **FastAPI**, and **Go** (Gin, Echo, Chi, Fiber, net/http) out of the box, and updates automatically as you edit your code.
 
 ---
 
@@ -30,17 +30,17 @@ APICompass scans the workspace using static analysis, extracts every route defin
 
 | Feature                   | Description                                                                      |
 | ------------------------- | -------------------------------------------------------------------------------- |
-| **Multi-framework**       | Express.js, NestJS, Flask, Django, FastAPI, and Go detected automatically         |
+| **Multi-framework**       | Express.js, NestJS, Flask, Django, FastAPI, and Go detected automatically        |
 | **Interactive tree view** | Routes shown in a collapsible sidebar grouped by file, HTTP method, or framework |
 | **Click-to-navigate**     | Click any route to jump to the exact file and line                               |
 | **Real-time updates**     | File watcher detects saves and re-parses only the changed file                   |
 | **Search**                | Quick-pick search across all discovered routes by path, method, or file name     |
 | **Colour-coded icons**    | GET (green), POST (blue), PUT (orange), DELETE (red), PATCH (yellow)             |
 | **Configurable**          | Include/exclude folders, choose frameworks, pick grouping style                  |
-| **Prefix resolution**    | Cross-file mount prefix resolution for Express, Flask, and FastAPI               |
+| **Prefix resolution**     | Cross-file mount prefix resolution for Express, Flask, and FastAPI               |
 | **Route deduplication**   | Duplicate routes from multiple parsers are automatically removed                 |
 | **Export**                | Export all routes to JSON or OpenAPI 3.0 (YAML/JSON)                             |
-| **Keyboard shortcuts**    | `Ctrl+Shift+A R` to refresh, `Ctrl+Shift+A S` to search                         |
+| **Keyboard shortcuts**    | `Ctrl+Shift+A R` to refresh, `Ctrl+Shift+A S` to search                          |
 | **Context menus**         | Right-click a route to copy its path or a cURL command                           |
 | **Lightweight**           | ~35 KB bundled; async scanning keeps the editor responsive                       |
 
@@ -56,11 +56,11 @@ app.post('/users', handler);
 router.put('/users/:id', handler);
 app.delete('/users/:id', handler);
 app.route('/items').get(listItems).post(createItem);
-app.use('/api', router);          // same-file mount prefix auto-resolved
+app.use('/api', router); // same-file mount prefix auto-resolved
 
 // Cross-file: prefix applied to routes in imported router files
 const usersRouter = require('./routes/users');
-app.use('/api/users', usersRouter);  // routes in users.js get /api/users prefix
+app.use('/api/users', usersRouter); // routes in users.js get /api/users prefix
 ```
 
 ### NestJS (TypeScript / JavaScript)
@@ -195,26 +195,26 @@ Install the `.vsix` file via _Extensions > ··· > Install from VSIX…_ in VS 
 
 Open **Settings** (`Ctrl+,`) and search for `apicompass`.
 
-| Setting                        | Default                                              | Description                                      |
-| ------------------------------ | ---------------------------------------------------- | ------------------------------------------------ |
-| `apicompass.includePaths`      | `[]` (scan everything)                               | Glob patterns for folders to include             |
-| `apicompass.excludePaths`      | `node_modules, .git, venv, __pycache__, dist, build` | Glob patterns for folders to skip                |
+| Setting                        | Default                                                     | Description                                      |
+| ------------------------------ | ----------------------------------------------------------- | ------------------------------------------------ |
+| `apicompass.includePaths`      | `[]` (scan everything)                                      | Glob patterns for folders to include             |
+| `apicompass.excludePaths`      | `node_modules, .git, venv, __pycache__, dist, build`        | Glob patterns for folders to skip                |
 | `apicompass.enabledFrameworks` | `["express", "flask", "django", "fastapi", "go", "nestjs"]` | Which frameworks to scan for                     |
-| `apicompass.groupBy`           | `"file"`                                             | Group routes by `file`, `method`, or `framework` |
+| `apicompass.groupBy`           | `"file"`                                                    | Group routes by `file`, `method`, or `framework` |
 
 ---
 
 ## Commands
 
-| Command                            | Shortcut               | Description                                                           |
-| ---------------------------------- | ---------------------- | --------------------------------------------------------------------- |
-| `APICompass: Refresh Routes`       | `Ctrl+Shift+A R`      | Re-scan the entire workspace                                          |
-| `APICompass: Search Routes`        | `Ctrl+Shift+A S`      | Open a quick-pick search box to find routes                           |
-| `APICompass: Navigate to Route`    |                        | Jump to a route's definition (also triggered by clicking a tree item) |
-| `APICompass: Copy Route Path`      | Right-click menu       | Copy `METHOD /path` to clipboard                                     |
-| `APICompass: Copy as cURL`         | Right-click menu       | Copy a cURL command to clipboard                                      |
-| `APICompass: Export Routes as JSON` | Tree view header      | Export all routes to a JSON file                                      |
-| `APICompass: Export Routes as OpenAPI` | Tree view header   | Export all routes as an OpenAPI 3.0 spec (YAML or JSON)               |
+| Command                                | Shortcut         | Description                                                           |
+| -------------------------------------- | ---------------- | --------------------------------------------------------------------- |
+| `APICompass: Refresh Routes`           | `Ctrl+Shift+A R` | Re-scan the entire workspace                                          |
+| `APICompass: Search Routes`            | `Ctrl+Shift+A S` | Open a quick-pick search box to find routes                           |
+| `APICompass: Navigate to Route`        |                  | Jump to a route's definition (also triggered by clicking a tree item) |
+| `APICompass: Copy Route Path`          | Right-click menu | Copy `METHOD /path` to clipboard                                      |
+| `APICompass: Copy as cURL`             | Right-click menu | Copy a cURL command to clipboard                                      |
+| `APICompass: Export Routes as JSON`    | Tree view header | Export all routes to a JSON file                                      |
+| `APICompass: Export Routes as OpenAPI` | Tree view header | Export all routes as an OpenAPI 3.0 spec (YAML or JSON)               |
 
 ---
 
@@ -243,7 +243,7 @@ src/
 │   ├── logger.ts               OutputChannel-based logger (Singleton)
 │   ├── config.ts               Reads VS Code settings (Singleton)
 │   └── deduplicateRoutes.ts    Route deduplication utility
-└── extension.ts                Entry point — wires everything together
+└── extension.ts                Entry point - wires everything together
 ```
 
 ### Design Patterns Used
@@ -269,13 +269,13 @@ npm run test:coverage
 
 Current coverage:
 
-| Metric      | Value  |
-| ----------- | ------ |
-| Statements  | 97%+   |
-| Functions   | 100%   |
-| Lines       | 97%+   |
-| Test suites | 9      |
-| Tests       | 127    |
+| Metric      | Value |
+| ----------- | ----- |
+| Statements  | 97%+  |
+| Functions   | 100%  |
+| Lines       | 97%+  |
+| Test suites | 9     |
+| Tests       | 127   |
 
 Test fixtures for Express, NestJS, Flask, Django, FastAPI, and Go are in `test/fixtures/`.
 
@@ -302,16 +302,16 @@ This extension was built as the **Semester 4 Project** for the **BITS Pilani WIL
 
 ## Roadmap
 
-- [x] Cross-file mount prefix resolution (Express, Flask, FastAPI) — done
-- [x] Same-file `app.use()` / `url_prefix` / `include_router` prefix resolution — done
-- [x] NestJS decorator support (`@Get()`, `@Post()`, `@Controller()`) — done
-- [x] FastAPI support (`@app.get()`, `@app.post()`) — done
-- [x] Go support (Gin, Echo, Chi, Fiber, net/http) — done
-- [x] Route deduplication — done
-- [x] Keyboard shortcuts and context menus — done
-- [x] Export routes to JSON / OpenAPI stub — done
-- [x] CI/CD pipeline (GitHub Actions) — done
-- [x] Production packaging (.vscodeignore, CHANGELOG, LICENSE) — done
+- [x] Cross-file mount prefix resolution (Express, Flask, FastAPI) - done
+- [x] Same-file `app.use()` / `url_prefix` / `include_router` prefix resolution - done
+- [x] NestJS decorator support (`@Get()`, `@Post()`, `@Controller()`) - done
+- [x] FastAPI support (`@app.get()`, `@app.post()`) - done
+- [x] Go support (Gin, Echo, Chi, Fiber, net/http) - done
+- [x] Route deduplication - done
+- [x] Keyboard shortcuts and context menus - done
+- [x] Export routes to JSON / OpenAPI stub - done
+- [x] CI/CD pipeline (GitHub Actions) - done
+- [x] Production packaging (.vscodeignore, CHANGELOG, LICENSE) - done
 - [ ] Publish to VS Code Marketplace
 
 ---
@@ -356,4 +356,3 @@ This project is licensed under the [MIT License](LICENSE).
 
 **Surya V**  
 **suryavardhan28@gmail.com**
-BITS Pilani WILP — Full Stack Engineering (2024TM93020)
