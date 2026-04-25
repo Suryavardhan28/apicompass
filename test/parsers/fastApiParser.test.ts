@@ -154,4 +154,79 @@ describe('FastApiParser', () => {
       expect(result.routes).toHaveLength(0);
     });
   });
+
+  describe('extractMountPrefixes (cross-file)', () => {
+    it('should extract variable names and prefixes from include_router', () => {
+      const content = [
+        `from fastapi import FastAPI`,
+        `from .routers.users import router as users_router`,
+        `from .routers.products import router as products_router`,
+        ``,
+        `app = FastAPI()`,
+        `app.include_router(users_router, prefix='/api/users')`,
+        `app.include_router(products_router, prefix='/api/products')`,
+      ].join('\n');
+
+      const mounts = parser.extractMountPrefixes('/project/main.py', content);
+
+      expect(mounts).toHaveLength(2);
+      expect(mounts[0]).toMatchObject({ prefix: '/api/users', variableName: 'users_router' });
+      expect(mounts[1]).toMatchObject({ prefix: '/api/products', variableName: 'products_router' });
+    });
+
+    it('should ignore include_router without prefix', () => {
+      const content = [
+        `from .routers import main_router`,
+        `app.include_router(main_router)`,
+      ].join('\n');
+
+      const mounts = parser.extractMountPrefixes('/project/main.py', content);
+
+      expect(mounts).toHaveLength(0);
+    });
+
+    it('should return empty when no include_router calls', () => {
+      const content = [
+        `from fastapi import FastAPI`,
+        `app = FastAPI()`,
+        `@app.get("/health")`,
+        `async def health(): pass`,
+      ].join('\n');
+
+      const mounts = parser.extractMountPrefixes('/project/main.py', content);
+
+      expect(mounts).toHaveLength(0);
+    });
+
+    it('should handle module-level dotted access (users.router)', () => {
+      const content = [
+        `from fastapi import FastAPI`,
+        `from routers import users, products, orders`,
+        ``,
+        `app = FastAPI()`,
+        `app.include_router(users.router, prefix='/api/users', tags=['users'])`,
+        `app.include_router(products.router, prefix='/api/products', tags=['products'])`,
+        `app.include_router(orders.router, prefix='/api/orders', tags=['orders'])`,
+      ].join('\n');
+
+      const mounts = parser.extractMountPrefixes('/project/main.py', content);
+
+      expect(mounts).toHaveLength(3);
+      expect(mounts[0]).toMatchObject({ prefix: '/api/users', variableName: 'users.router' });
+      expect(mounts[1]).toMatchObject({ prefix: '/api/products', variableName: 'products.router' });
+      expect(mounts[2]).toMatchObject({ prefix: '/api/orders', variableName: 'orders.router' });
+    });
+
+    it('should handle prefix in any kwarg position (e.g. after tags)', () => {
+      const content = [
+        `from routers.items import router as items_router`,
+        `app.include_router(items_router, tags=['items'], prefix='/api/items')`,
+      ].join('\n');
+
+      const mounts = parser.extractMountPrefixes('/project/main.py', content);
+
+      expect(mounts).toHaveLength(1);
+      expect(mounts[0]).toMatchObject({ prefix: '/api/items', variableName: 'items_router' });
+    });
+  });
 });
