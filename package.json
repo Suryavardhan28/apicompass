@@ -2,7 +2,7 @@
   "name": "apicompass",
   "displayName": "APICompass",
   "description": "Automated API Route Visualizer for VS Code - discover, visualize, and navigate REST API routes across Express.js, NestJS, Flask, Django, FastAPI, and Go projects.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "surya-v",
   "license": "MIT",
   "repository": {
