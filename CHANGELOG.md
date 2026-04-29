@@ -5,6 +5,19 @@ All notable changes to the APICompass extension will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3]
+
+### Added
+
+- Added `apicompass.enabled` workspace setting (default: `true`) to allow disabling APICompass per repository.
+
+### Changed
+
+- When `apicompass.enabled` is `false`, APICompass skips initial route scan and file watcher updates.
+- Refresh, Search, and Export commands now show a clear message when APICompass is disabled for the workspace.
+- Changing `apicompass.enabled` at runtime now applies immediately: enabling starts watchers and triggers a full scan; disabling stops watchers and clears cached routes.
+- Sidebar empty state now shows a disabled-specific message when APICompass is disabled for the workspace.
+
 ## [0.1.2] - 2026-04-26
 
 ### Changed
