@@ -2,7 +2,7 @@
   "name": "apicompass",
   "displayName": "APICompass",
   "description": "Automated API Route Visualizer - discover, visualize, and navigate REST API routes across frameworks",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "publisher": "surya-v",
   "license": "MIT",
   "repository": {
