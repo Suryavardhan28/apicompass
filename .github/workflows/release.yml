@@ -9,6 +9,9 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -35,8 +38,22 @@ jobs:
       - name: Install Publishing Tools
         run: npm install -g vsce ovsx
 
+      - name: Package Extension
+        run: vsce package
+
       - name: Publish to VS Code Marketplace
         run: vsce publish -p ${{ secrets.VSCE_TOKEN }}
 
       - name: Publish to OpenVSX
         run: ovsx publish -p ${{ secrets.OVSX_TOKEN }}
+
+      - name: Get VSIX File
+        id: vsix
+        run: |
+          echo "VSIX_FILE=$(ls *.vsix)" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.vsix.outputs.VSIX_FILE }}
+          generate_release_notes: true
