@@ -1,54 +1,39 @@
-name: Release Extension
+name: Publish Extension
 
 on:
-  workflow_dispatch:
-    inputs:
-      version_type:
-        description: 'Version bump type'
-        required: true
-        type: choice
-        options:
-          - patch
-          - minor
-          - major
+  push:
+    tags:
+      - 'v*'
 
 jobs:
-  release:
+  publish:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout Main Branch
+      - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          ref: main
           fetch-depth: 0
+
+      - name: Verify Tag Is From Main Branch
+        run: |
+          git fetch origin main
+
+          if ! git branch --remote --contains $GITHUB_SHA | grep origin/main; then
+            echo "Tag is not from main branch"
+            exit 1
+          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Configure Git
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-
       - name: Install Dependencies
         run: npm ci
 
       - name: Install Publishing Tools
         run: npm install -g vsce ovsx
-
-      - name: Bump Version
-        run: npm version ${{ github.event.inputs.version_type }}
-
-      - name: Push Commit and Tag
-        run: |
-          git push origin main
-          git push origin --tags
 
       - name: Publish to VS Code Marketplace
         run: vsce publish -p ${{ secrets.VSCE_TOKEN }}
